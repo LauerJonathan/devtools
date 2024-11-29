@@ -1,0 +1,4 @@
+.developUStyle p ul {
+  list-style-type: none;
+  gap: 10px;
+}

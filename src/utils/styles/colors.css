@@ -1,0 +1,14 @@
+/******************************************
+**** Define your project's colors here ****
+******************************************/
+
+:root {
+  font-display: swap;
+  --primary: #00d1b2;
+  --primaryOPAC80: #00d1b270;
+  --primaryClear: rgb(65, 51, 101);
+  --primaryClear2: rgb(174, 165, 197);
+  --secondary: blue;
+  --tertiary: green;
+  --darkgrey: #2e2929;
+}

@@ -1,0 +1,42 @@
+@import url(./colors.css);
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.mainContent {
+  position: relative;
+  min-height: 100vh;
+  flex: 1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+.hidden {
+  display: none !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.centerContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.supprDisplay {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}

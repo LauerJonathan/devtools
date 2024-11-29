@@ -1,0 +1,147 @@
+nav {
+  width: 100vw;
+  height: 80px;
+  background-color: #00d1b2;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+nav .nav {
+  height: 100%;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav .nav ul {
+  list-style-type: none;
+  display: flex;
+}
+
+nav img {
+  display: block;
+  width: 250px;
+  height: 40px;
+  object-fit: contain;
+}
+
+nav > * {
+  color: #333333;
+}
+
+nav ul li {
+  color: #333333;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: 500ms;
+  text-underline-offset: 8px;
+  /* font-family: "ADLaM Display", system-ui; */
+  font-weight: 400;
+  font-style: normal;
+}
+
+nav ul li:hover {
+  transform: scale(1.1);
+  transition: 500ms;
+}
+
+nav ul li.active a {
+  text-decoration: underline;
+  color: #fb3245;
+}
+
+nav ul li:not(:last-child)::after {
+  content: "•";
+  padding: 0 15px 0 15px;
+}
+
+nav div.turnTheLight label:not(.switch),
+nav > button {
+  display: none;
+}
+
+nav button {
+  color: #fb3245;
+  font-weight: bold;
+}
+@media only screen and (max-width: 700px) {
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  nav .navContent {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    background-color: var(--primaryOPAC80) !important;
+    backdrop-filter: blur(10px);
+  }
+  nav .navContent ul {
+    width: 100%;
+    justify-content: space-around;
+  }
+  nav .logo {
+    display: block;
+    position: absolute;
+    left: 30px;
+  }
+  nav .switchContainer {
+    display: flex;
+    gap: 10px;
+  }
+  nav div.turnTheLight label:not(.switch),
+  nav > button {
+    display: block;
+  }
+  nav button {
+    width: 80px;
+    height: 80px;
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+  }
+  nav .navContent {
+    height: 0px;
+    position: absolute;
+    top: 99%;
+    background-color: var(--primary);
+    box-sizing: border-box;
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px;
+  }
+  nav.open .navContent {
+    height: auto;
+    padding: 20px;
+  }
+  nav ul li:not(:last-child)::after {
+    content: "";
+    padding-left: 10px;
+  }
+  nav .switch {
+    right: 0px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  nav img {
+    width: 150px;
+  }
+  nav ul {
+    gap: 0px;
+  }
+  nav ul li {
+    font-size: 0.9em;
+    transition: 500ms;
+    text-underline-offset: 6px;
+  }
+  nav .switchContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+}
