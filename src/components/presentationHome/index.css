@@ -1,7 +1,20 @@
+main {
+  padding-bottom: 200px !important;
+}
+
+.containerEx {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
 .developUStyle ul {
+  display: block;
+  width: max-content !important;
   list-style-type: none;
   gap: 10px;
   width: max-content;
+  background-color: red;
 }
 
 .developUStyle ul li {
@@ -15,4 +28,51 @@
   width: 30px !important;
   height: 30px !important;
   background-color: red;
+}
+
+.colorPalette {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+}
+
+.colorCase {
+  width: 90px;
+  height: 50px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  display: inline-block;
+  text-align: center;
+  line-height: 50px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.codeBlock {
+  position: relative;
+  width: max-content;
+  margin-top: 20px;
+  padding: 15px;
+  /*background: #f4f4f4;*/
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: "Courier New", Courier, monospace;
+  color: #333333;
+}
+
+pre {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.copyBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  position: absolute;
+  top: -20px;
+  right: -20px;
 }
