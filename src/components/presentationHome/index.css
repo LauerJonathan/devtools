@@ -1,4 +1,18 @@
-.developUStyle p ul {
+.developUStyle ul {
   list-style-type: none;
   gap: 10px;
+  width: max-content;
+}
+
+.developUStyle ul li {
+  width: 100% !important;
+  padding: 5px 10px;
+  display: flex;
+}
+
+.developUStyle ul .colorCase {
+  display: block;
+  width: 30px !important;
+  height: 30px !important;
+  background-color: red;
 }
