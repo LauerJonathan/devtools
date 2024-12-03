@@ -1,51 +1,72 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import tinycolor from "tinycolor2";
-import "./index.css";
+import Prism from "prismjs";
+import "prismjs/themes/prism-tomorrow.css"; // Thème de Prism
+import "prismjs/components/prism-css.min.js"; // Support pour CSS
 
 import { FaCopy } from "react-icons/fa";
+import "./index.css";
 
 const PresentationHome = () => {
   const [primaryColor, setPrimaryColor] = useState("#ff0000"); // Couleur primaire par défaut
   const [copySuccess, setCopySuccess] = useState(false); // État pour afficher un message de succès
+  const [colorFormat, setColorFormat] = useState("hex"); // Format de couleur par défaut: hexadécimal
 
   // Calcul des couleurs
   const colors = useMemo(() => {
     const primary = tinycolor(primaryColor);
-    const secondary = primary.clone().spin(120).saturate(20).toHexString();
-    const tertiary = primary.clone().spin(240).saturate(20).toHexString();
+    const secondary = primary.clone().spin(120).saturate(20);
+    const tertiary = primary.clone().spin(240).saturate(20);
 
-    const primaryLight = primary.clone().lighten(30).toHexString();
-    const primaryDark = primary.clone().darken(30).toHexString();
-    const secondaryLight = tinycolor(secondary).lighten(30).toHexString();
-    const secondaryDark = tinycolor(secondary).darken(30).toHexString();
-    const tertiaryLight = tinycolor(tertiary).lighten(30).toHexString();
-    const tertiaryDark = tinycolor(tertiary).darken(30).toHexString();
+    const formatColor = (color) => {
+      const hexValue = color.toHexString().toLowerCase();
+      if (hexValue === "#fff") return "rgb(255, 255, 255)";
+      if (hexValue === "#000") return "rgb(0, 0, 0)";
+      return colorFormat === "rgb" ? color.toRgbString() : color.toHexString();
+    };
+
+    const primaryLight = primary.clone().lighten(30);
+    const primaryDark = primary.clone().darken(30);
+    const secondaryLight = secondary.clone().lighten(30);
+    const secondaryDark = secondary.clone().darken(30);
+    const tertiaryLight = tertiary.clone().lighten(30);
+    const tertiaryDark = tertiary.clone().darken(30);
 
     return {
       primary: {
-        primaryLight,
-        primary: primary.toHexString(),
-        primaryDark,
+        primaryLight: formatColor(primaryLight),
+        primary: formatColor(primary),
+        primaryDark: formatColor(primaryDark),
       },
       secondary: {
-        secondaryLight,
-        secondary,
-        secondaryDark,
+        secondaryLight: formatColor(secondaryLight),
+        secondary: formatColor(secondary),
+        secondaryDark: formatColor(secondaryDark),
       },
       tertiary: {
-        tertiaryLight,
-        tertiary,
-        tertiaryDark,
+        tertiaryLight: formatColor(tertiaryLight),
+        tertiary: formatColor(tertiary),
+        tertiaryDark: formatColor(tertiaryDark),
       },
     };
-  }, [primaryColor]);
+  }, [primaryColor, colorFormat]);
 
   const getTextColor = (bgColor) => {
     return tinycolor(bgColor).isLight() ? "#000" : "#fff";
   };
 
+  const formatTextColor = (color) => {
+    if (color === "#fff") return colorFormat === "rgb" ? "rgb(255, 255, 255)" : "#fff";
+    if (color === "#000") return colorFormat === "rgb" ? "rgb(0, 0, 0)" : "#000";
+    return color;
+  };
+
   const handleColorChange = (event) => {
     setPrimaryColor(event.target.value);
+  };
+
+  const toggleColorFormat = () => {
+    setColorFormat((prevFormat) => (prevFormat === "hex" ? "rgb" : "hex"));
   };
 
   // Générer le CSS sous forme de texte
@@ -55,27 +76,21 @@ const PresentationHome = () => {
       `  --primary-light: ${colors.primary.primaryLight};`,
       `  --primary: ${colors.primary.primary};`,
       `  --primary-dark: ${colors.primary.primaryDark};`,
-      `  --primary-text: ${getTextColor(colors.primary.primary)};`,
-      `  --primary-light-text: ${getTextColor(colors.primary.primaryLight)};`,
-      `  --primary-dark-text: ${getTextColor(colors.primary.primaryDark)};`,
+      `  --primary-text: ${formatTextColor(getTextColor(colors.primary.primary))};`,
+      `  --primary-light-text: ${formatTextColor(getTextColor(colors.primary.primaryLight))};`,
+      `  --primary-dark-text: ${formatTextColor(getTextColor(colors.primary.primaryDark))};`,
       `  --secondary-light: ${colors.secondary.secondaryLight};`,
       `  --secondary: ${colors.secondary.secondary};`,
       `  --secondary-dark: ${colors.secondary.secondaryDark};`,
-      `  --secondary-text: ${getTextColor(colors.secondary.secondary)};`,
-      `  --secondary-light-text: ${getTextColor(
-        colors.secondary.secondaryLight
-      )};`,
-      `  --secondary-dark-text: ${getTextColor(
-        colors.secondary.secondaryDark
-      )};`,
+      `  --secondary-text: ${formatTextColor(getTextColor(colors.secondary.secondary))};`,
+      `  --secondary-light-text: ${formatTextColor(getTextColor(colors.secondary.secondaryLight))};`,
+      `  --secondary-dark-text: ${formatTextColor(getTextColor(colors.secondary.secondaryDark))};`,
       `  --tertiary-light: ${colors.tertiary.tertiaryLight};`,
       `  --tertiary: ${colors.tertiary.tertiary};`,
       `  --tertiary-dark: ${colors.tertiary.tertiaryDark};`,
-      `  --tertiary-text: ${getTextColor(colors.tertiary.tertiary)};`,
-      `  --tertiary-light-text: ${getTextColor(
-        colors.tertiary.tertiaryLight
-      )};`,
-      `  --tertiary-dark-text: ${getTextColor(colors.tertiary.tertiaryDark)};`,
+      `  --tertiary-text: ${formatTextColor(getTextColor(colors.tertiary.tertiary))};`,
+      `  --tertiary-light-text: ${formatTextColor(getTextColor(colors.tertiary.tertiaryLight))};`,
+      `  --tertiary-dark-text: ${formatTextColor(getTextColor(colors.tertiary.tertiaryDark))};`,
       "}",
     ];
     return cssLines.join("\n");
@@ -93,6 +108,11 @@ const PresentationHome = () => {
         console.error("Erreur lors de la copie :", err);
       });
   };
+
+  // Effectuer la coloration syntaxique après que le code a été mis à jour
+  useEffect(() => {
+    Prism.highlightAll(); // Applique la coloration à tous les blocs de code
+  }, [primaryColor, colorFormat]);
 
   return (
     <section className="developUStyle">
@@ -112,6 +132,10 @@ const PresentationHome = () => {
           />
         </label>
       </div>
+
+      <button onClick={toggleColorFormat} className="toggleFormatBtn">
+        Basculer en {colorFormat === "hex" ? "RGB" : "Hexadécimal"}
+      </button>
 
       <div className="containerEx">
         <ul className="colorPalette">
@@ -140,7 +164,7 @@ const PresentationHome = () => {
         <div className="codeBlock">
           <h2>Code CSS Généré</h2>
           <pre>
-            <code>{generateCssVariables()}</code>
+            <code className="language-css">{generateCssVariables()}</code>
           </pre>
           <button onClick={copyToClipboard} className="copyBtn">
             <FaCopy fill="#333333" />
