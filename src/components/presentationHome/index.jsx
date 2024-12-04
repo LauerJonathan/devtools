@@ -11,6 +11,7 @@ const PresentationHome = () => {
   const [primaryColor, setPrimaryColor] = useState("#ff0000"); // Couleur primaire par défaut
   const [copySuccess, setCopySuccess] = useState(false); // État pour afficher un message de succès
   const [colorFormat, setColorFormat] = useState("hex"); // Format de couleur par défaut: hexadécimal
+  const [varUseExample, setVarUseExample] = useState("");
 
   // Calcul des couleurs
   const colors = useMemo(() => {
@@ -56,8 +57,10 @@ const PresentationHome = () => {
   };
 
   const formatTextColor = (color) => {
-    if (color === "#fff") return colorFormat === "rgb" ? "rgb(255, 255, 255)" : "#fff";
-    if (color === "#000") return colorFormat === "rgb" ? "rgb(0, 0, 0)" : "#000";
+    if (color === "#fff")
+      return colorFormat === "rgb" ? "rgb(255, 255, 255)" : "#fff";
+    if (color === "#000")
+      return colorFormat === "rgb" ? "rgb(0, 0, 0)" : "#000";
     return color;
   };
 
@@ -76,23 +79,64 @@ const PresentationHome = () => {
       `  --primary-light: ${colors.primary.primaryLight};`,
       `  --primary: ${colors.primary.primary};`,
       `  --primary-dark: ${colors.primary.primaryDark};`,
-      `  --primary-text: ${formatTextColor(getTextColor(colors.primary.primary))};`,
-      `  --primary-light-text: ${formatTextColor(getTextColor(colors.primary.primaryLight))};`,
-      `  --primary-dark-text: ${formatTextColor(getTextColor(colors.primary.primaryDark))};`,
+      `  --primary-text: ${formatTextColor(
+        getTextColor(colors.primary.primary)
+      )};`,
+      `  --primary-light-text: ${formatTextColor(
+        getTextColor(colors.primary.primaryLight)
+      )};`,
+      `  --primary-dark-text: ${formatTextColor(
+        getTextColor(colors.primary.primaryDark)
+      )};`,
       `  --secondary-light: ${colors.secondary.secondaryLight};`,
       `  --secondary: ${colors.secondary.secondary};`,
       `  --secondary-dark: ${colors.secondary.secondaryDark};`,
-      `  --secondary-text: ${formatTextColor(getTextColor(colors.secondary.secondary))};`,
-      `  --secondary-light-text: ${formatTextColor(getTextColor(colors.secondary.secondaryLight))};`,
-      `  --secondary-dark-text: ${formatTextColor(getTextColor(colors.secondary.secondaryDark))};`,
+      `  --secondary-text: ${formatTextColor(
+        getTextColor(colors.secondary.secondary)
+      )};`,
+      `  --secondary-light-text: ${formatTextColor(
+        getTextColor(colors.secondary.secondaryLight)
+      )};`,
+      `  --secondary-dark-text: ${formatTextColor(
+        getTextColor(colors.secondary.secondaryDark)
+      )};`,
       `  --tertiary-light: ${colors.tertiary.tertiaryLight};`,
       `  --tertiary: ${colors.tertiary.tertiary};`,
       `  --tertiary-dark: ${colors.tertiary.tertiaryDark};`,
-      `  --tertiary-text: ${formatTextColor(getTextColor(colors.tertiary.tertiary))};`,
-      `  --tertiary-light-text: ${formatTextColor(getTextColor(colors.tertiary.tertiaryLight))};`,
-      `  --tertiary-dark-text: ${formatTextColor(getTextColor(colors.tertiary.tertiaryDark))};`,
+      `  --tertiary-text: ${formatTextColor(
+        getTextColor(colors.tertiary.tertiary)
+      )};`,
+      `  --tertiary-light-text: ${formatTextColor(
+        getTextColor(colors.tertiary.tertiaryLight)
+      )};`,
+      `  --tertiary-dark-text: ${formatTextColor(
+        getTextColor(colors.tertiary.tertiaryDark)
+      )};`,
       "}",
     ];
+    return cssLines.join("\n");
+  };
+
+  const generateVarExample = () => {
+    const cssLines =
+      colorFormat === "hex"
+        ? [
+            "/* Si vous utilisez des couleurs héxa */",
+            ".className {",
+            "  color: var(--primary-text)",
+            `  background-color: var(--primary)`,
+            "}",
+          ]
+        : [
+            "/* Si vous utilisez des couleurs RGB() */",
+            ".className {",
+            "  color: var(--primary-text)",
+            "  background-color: var(--primary)",
+            "/* Pour changer l'opacité */",
+            "  color: rgba(var(--primary), 0.5)",
+            `  background-color: rgba(var(--primary), 0.5)`,
+            "}",
+          ];
     return cssLines.join("\n");
   };
 
@@ -172,6 +216,9 @@ const PresentationHome = () => {
           {copySuccess && <p style={{ color: "green" }}>Copié avec succès !</p>}
         </div>
       </div>
+      <pre>
+        <code className="language-css">{generateVarExample()}</code>
+      </pre>
     </section>
   );
 };
