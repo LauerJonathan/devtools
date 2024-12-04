@@ -4,6 +4,10 @@ import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css"; // Thème de Prism
 import "prismjs/components/prism-css.min.js"; // Support pour CSS
 
+import { Switch } from "devtools--btns";
+import hexPic from "../../assets/media/switchMedia/hex.png";
+import rgbPic from "../../assets/media/switchMedia/rgb.png";
+
 import { FaCopy } from "react-icons/fa";
 import "./index.css";
 
@@ -11,7 +15,6 @@ const PresentationHome = () => {
   const [primaryColor, setPrimaryColor] = useState("#ff0000"); // Couleur primaire par défaut
   const [copySuccess, setCopySuccess] = useState(false); // État pour afficher un message de succès
   const [colorFormat, setColorFormat] = useState("hex"); // Format de couleur par défaut: hexadécimal
-  const [varUseExample, setVarUseExample] = useState("");
 
   // Calcul des couleurs
   const colors = useMemo(() => {
@@ -70,6 +73,12 @@ const PresentationHome = () => {
 
   const toggleColorFormat = () => {
     setColorFormat((prevFormat) => (prevFormat === "hex" ? "rgb" : "hex"));
+  };
+
+  const state = {
+    state: colorFormat,
+    value: { on: "rgb", off: "hex" },
+    func: toggleColorFormat,
   };
 
   // Générer le CSS sous forme de texte
@@ -177,9 +186,7 @@ const PresentationHome = () => {
         </label>
       </div>
 
-      <button onClick={toggleColorFormat} className="toggleFormatBtn">
-        Basculer en {colorFormat === "hex" ? "RGB" : "Hexadécimal"}
-      </button>
+      <Switch pic1={hexPic} pic2={rgbPic} state={state} />
 
       <div className="containerEx">
         <ul className="colorPalette">
