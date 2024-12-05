@@ -9,14 +9,19 @@ main {
 }
 
 .containerEx .leftPart {
-  display: flex;
-  align-items: center;
   padding-top: 12px;
+  display: flex;
+}
+
+.containerEx .leftPart .codeBlock {
+  height: max-content;
+  min-height: 158px;
 }
 
 .developUStyle ul {
   display: block;
   width: max-content !important;
+  height: max-content;
   list-style-type: none;
   gap: 10px;
   width: max-content;
@@ -56,7 +61,7 @@ main {
 
 .codeBlock {
   position: relative;
-  width: max-content;
+  width: 430px;
   margin-top: 20px;
   padding: 15px;
   border: 1px solid #ddd;
@@ -65,8 +70,13 @@ main {
   color: #333333;
 }
 
+.codeBlock .header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 pre {
-  margin: 0;
   font-size: 14px;
   line-height: 1.5;
 }
@@ -93,4 +103,56 @@ code {
   display: block;
   white-space: pre-wrap; /* Gérer les retours à la ligne */
   word-wrap: break-word;
+}
+
+.respContainer {
+  display: flex;
+  gap: 30px;
+}
+
+@media only screen and (max-width: 1300px) {
+  .containerEx .respContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .codeBlock.right {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .leftPart .codeBlock {
+    width: max-content;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .containerEx {
+    width: 100%;
+  }
+  .leftPart {
+    flex-direction: column;
+    align-items: center;
+    width: 100% !important;
+    gap: 30px;
+    margin-top: 30px;
+  }
+  .leftPart .codeBlock {
+    width: 80vw;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .containerEx {
+    width: 100%;
+  }
+  .leftPart {
+    flex-direction: column;
+    align-items: center;
+    width: 100% !important;
+  }
+  .leftPart .codeBlock {
+    width: 80vw;
+  }
 }

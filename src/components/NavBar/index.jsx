@@ -18,7 +18,7 @@ const NavBar = ({ active }) => {
               <Link to="/">Accueil</Link>
             </li>
             <li>
-              <Link to="/">Other</Link>
+              <Link to="/">StyleSheet framework</Link>
             </li>
           </ul>
         </div>
