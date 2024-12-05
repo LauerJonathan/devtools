@@ -8,13 +8,18 @@ main {
   align-items: flex-start;
 }
 
+.containerEx .leftPart {
+  display: flex;
+  align-items: center;
+  padding-top: 12px;
+}
+
 .developUStyle ul {
   display: block;
   width: max-content !important;
   list-style-type: none;
   gap: 10px;
   width: max-content;
-  background-color: red;
 }
 
 .developUStyle ul li {
