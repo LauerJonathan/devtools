@@ -6,7 +6,7 @@ import logoDevtools from "../../assets/media/logodevtools.png";
 
 import { Link } from "react-router-dom";
 
-const NavBar = ({ active }) => {
+const NavBar = () => {
   const [open, setOpen] = useState(false);
   return (
     <nav className={open ? "open" : ""}>
@@ -18,7 +18,7 @@ const NavBar = ({ active }) => {
               <Link to="/">Accueil</Link>
             </li>
             <li>
-              <Link to="/">StyleSheet framework</Link>
+              <Link to="/loader">StyleSheet framework</Link>
             </li>
           </ul>
         </div>

@@ -60,6 +60,7 @@ main {
 }
 
 .codeBlock {
+  max-width: 90vw;
   position: relative;
   width: 430px;
   margin-top: 20px;
@@ -100,9 +101,12 @@ pre {
 }
 
 code {
+  width: 100%;
   display: block;
   white-space: pre-wrap; /* Gérer les retours à la ligne */
   word-wrap: break-word;
+  overflow: scroll;
+  box-sizing: border-box;
 }
 
 .respContainer {
@@ -122,7 +126,7 @@ code {
 }
 
 @media only screen and (max-width: 800px) {
-  .leftPart .codeBlock {
+  .codeBlock {
     width: max-content;
   }
 }
@@ -152,7 +156,7 @@ code {
     align-items: center;
     width: 100% !important;
   }
-  .leftPart .codeBlock {
+  .codeBlock {
     width: 80vw;
   }
 }
