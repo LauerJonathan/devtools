@@ -9,7 +9,7 @@ import LoadingPage from "../pages/LoadingPage";
 
 const Router = () => {
   return (
-    <Routing>
+    <Routing basename="/devtools/">
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/loader" element={<LoadingPage />}></Route>
