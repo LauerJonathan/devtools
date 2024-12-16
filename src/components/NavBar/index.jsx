@@ -18,7 +18,7 @@ const NavBar = () => {
               <Link to="/">Accueil</Link>
             </li>
             <li>
-              <Link to="/loader">StyleSheet framework</Link>
+              <Link to="/loader">Générateur d'API node</Link>
             </li>
           </ul>
         </div>

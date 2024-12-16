@@ -18,6 +18,10 @@ main {
   min-height: 158px;
 }
 
+.developUStyle {
+  padding: 20px;
+}
+
 .developUStyle ul {
   display: block;
   width: max-content !important;
