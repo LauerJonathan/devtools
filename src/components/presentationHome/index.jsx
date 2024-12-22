@@ -65,25 +65,12 @@ const PresentationHome = () => {
   };
 
   const generateVarExample = () => {
-    const cssLines =
-      colorFormat === "hex"
-        ? [
-            "/* If using hex colors */",
-            ".className {",
-            "  color: var(--color2-text)",
-            "  background-color: var(--color2)",
-            "}",
-          ]
-        : [
-            "/* If using RGB colors */",
-            ".className {",
-            "  color: var(--color3-text)",
-            "  background-color: var(--color3)",
-            "/* To change opacity */",
-            "  color: rgba(var(--color3-text), 0.5)",
-            "  background-color: rgba(var(--color3-text), 0.5)",
-            "}",
-          ];
+    const cssLines = [
+      ".className {",
+      "  color: var(--color2-text)",
+      "  background-color: var(--color2)",
+      "}",
+    ];
     return cssLines.join("\n");
   };
 
