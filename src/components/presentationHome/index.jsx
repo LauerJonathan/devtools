@@ -69,6 +69,7 @@ const PresentationHome = () => {
       ".className {",
       "  color: var(--color2-text)",
       "  background-color: var(--color2)",
+      "  border: 2px solid var(--color1)",
       "}",
     ];
     return cssLines.join("\n");
