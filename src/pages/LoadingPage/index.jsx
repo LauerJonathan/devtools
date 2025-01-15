@@ -18,10 +18,7 @@ const LoadingPage = () => {
           <span className="progress--item__letter">.</span>
           <span className="progress--item__letter">.</span>
         </h1>
-        <p>
-          Cette fonctionalité n'est pas encore disponible, <br /> rendez-vous le
-          23/12/2024
-        </p>
+        <p>Cette fonctionalité n'est pas encore disponible...</p>
       </div>
     </div>
   );
